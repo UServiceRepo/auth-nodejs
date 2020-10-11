@@ -3,8 +3,8 @@ node_js:
   - "7"
   - "6"
   - "5"
-before_install:
-  - npm i -g npm@version-number
+    #before_install:
+    #  - npm i -g npm@version-number
 
 script: echo "Running tests against $(node -v)"
 
