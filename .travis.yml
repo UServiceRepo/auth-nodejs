@@ -17,5 +17,11 @@ jobs:
         provider: npm
         api_key: $NPM_API_KEY
         on: deploy-npm-release
+    - stage: unit test one
+      script: echo one
+    - stage: unit test two
+      script: echo two
+    - stage: deploy
+      script: echo deploy script
 
 
