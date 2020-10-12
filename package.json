@@ -1,0 +1,19 @@
+{
+  "name": "auth-nodejs",
+  "version": "0.0.1",
+  "description": "Auth Microservice from UServiceRepo",
+  "main": "service.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UServiceRepo/auth-nodejs.git"
+  },
+  "author": "",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/UServiceRepo/auth-nodejs/issues"
+  },
+  "homepage": "https://github.com/UServiceRepo/auth-nodejs#readme"
+}
