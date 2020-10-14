@@ -1,8 +1,7 @@
 language: node_js
 node_js:
-  - "7"
-  - "6"
-  - "5"
+  - lts/*
+  - node
     #before_install:
     #  - npm i -g npm@version-number
 
@@ -13,7 +12,7 @@ jobs:
     - stage: formatting
       script: npm run format
     - stage: npm release
-      node_js: "7"
+      #node_js: "7"
       script: echo "Deploying to npm"
       deploy:
         provider: npm
