@@ -18,7 +18,7 @@ app.get("/authorization", (req, res) => {
     return 406;
   }
   if (databaseAuthInteraction(body)) {
-    res.send("Authorization success your token is tinkywinky");
+    res.send(JSON.stringify({token:"tinkywinky"}));
   } else {
     res.status(405).send("Authorization failed invalid id or pass");
   }
