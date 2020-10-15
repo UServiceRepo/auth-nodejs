@@ -1,35 +1,27 @@
 import express from "express";
+import AuthReq from "./models/AuthReq";
 const app = express();
 const port = 8080;
 
 app.use(express.urlencoded());
 app.use(express.json());
 
-class auth {
-  id: string;
-  pass: string;
-  token: string;
-  constructor(json: {id: string, pass: string, token: string}) {
-    if (typeof(json.id) == "string")
-      this.id = json.id;
-    else
-      throw new Error("seg fault core dumped");
-    if (typeof(json.pass) == "string")
-      this.pass = json.pass;
-    else
-      throw new Error("seg fault core dumped");
-    if (typeof(json.token) == "string")
-      this.token = json.token;
-    else
-      throw new Error("seg fault core dumped");
-      
-  }
-};
+
 
 app.get("/authorization", (req, res) => {
-  const body = new auth(req.body);
-  console.log(body);
-  res.send("moicrosorev!!")
+  let body: AuthReq;
+  try {
+    body = new AuthReq(req.body);
+  } catch (error) {
+    console.log(`Invalid body ${error.message}`);
+    res.status(406).send(`Invalid body ${error.message}`);
+    return 406;
+  }
+  if (databaseAuthInteraction(body)) {
+    res.send("Authorization success your token is tinkywinky");
+  } else {
+    res.status(405).send("Authorization failed invalid id or pass");
+  }
 });
 
 app.get("*", (req, res) => {
@@ -39,3 +31,7 @@ app.get("*", (req, res) => {
 app.listen(port, () => {
   console.log(`server started. Listening at ${port}`);
 });
+
+function databaseAuthInteraction(authReq: AuthReq): boolean {
+  return authReq.id === "very" && authReq.pass === "cool"
+}
