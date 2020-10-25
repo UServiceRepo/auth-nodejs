@@ -1,2 +1,3 @@
-import: devops/UServiceRepo:.travis.yml@issue-2
+version: ~> 1.0
+import: UServiceRepo/devops:.travis.yml@master
 script: echo "Running tests against $(node -v)"
