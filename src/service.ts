@@ -10,6 +10,7 @@ app.use(express.json());
 
 app.get("/authorization", (req, res) => {
   let body: AuthReq;
+  
   try {
     body = new AuthReq(req.body);
   } catch (error) {
@@ -17,6 +18,7 @@ app.get("/authorization", (req, res) => {
     res.status(406).send(`Invalid body ${error.message}`);
     return 406;
   }
+
   if (databaseAuthInteraction(body)) {
     res.send(JSON.stringify({token:"tinkywinky"}));
   } else {
