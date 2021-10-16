@@ -4,8 +4,8 @@ import Path, { PathType } from "./models/Path";
 export const redirectRouter = express.Router();
 
 let pathList: Path[] = [
-  new Path( "get","/message","https://google.ca" ),
-  new Path( "get","/another","https://senecacollege.ca" ),
+  new Path("get", "/message", "https://google.ca"),
+  new Path("get", "/another", "https://senecacollege.ca"),
 ];
 
 function redirect(req: Request, res: Response, pathObj: Path) {

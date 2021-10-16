@@ -1,4 +1,9 @@
-export enum PathType { get, post, put, delete }
+export enum PathType {
+  get,
+  post,
+  put,
+  delete,
+}
 
 export default class Path {
   type: PathType;
