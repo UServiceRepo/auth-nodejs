@@ -1,16 +1,16 @@
 import express from "express";
 import AuthReq from "./models/AuthReq";
+import { redirectRouter } from "./redirect";
+
 const app = express();
 const port = 8080;
 
 app.use(express.urlencoded());
 app.use(express.json());
 
-
-
 app.get("/authorization", (req, res) => {
   let body: AuthReq;
-  
+
   try {
     body = new AuthReq(req.body);
   } catch (error) {
@@ -20,11 +20,13 @@ app.get("/authorization", (req, res) => {
   }
 
   if (databaseAuthInteraction(body)) {
-    res.send(JSON.stringify({token:"tinkywinky"}));
+    res.send(JSON.stringify({ token: "tinkywinky" }));
   } else {
     res.status(405).send("Authorization failed invalid id or pass");
   }
 });
+
+app.use("/", redirectRouter);
 
 app.get("*", (req, res) => {
   res.status(500).send("Unimplemented Feature");
@@ -35,5 +37,5 @@ app.listen(port, () => {
 });
 
 function databaseAuthInteraction(authReq: AuthReq): boolean {
-  return authReq.id === "very" && authReq.pass === "cool"
+  return authReq.id === "very" && authReq.pass === "cool";
 }
