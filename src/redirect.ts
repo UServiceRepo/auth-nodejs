@@ -7,8 +7,8 @@ var pathList = [
   { type : "get", path : "/another", target : "https://senecacollege.ca"},
 ];
 
-function redirect (req, res, pathObj) => {
-  res.send("Redirect to " + pathList[x].target);
+function redirect (req, res, pathObj) {
+  res.redirect(pathObj.target);
 }
 
 for ( let x in pathList ){
