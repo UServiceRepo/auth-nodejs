@@ -8,26 +8,26 @@ var pathList = [
 
 for ( let x in pathList ){
   if (pathList[x].type === "get"){
-    router.get(path.path, (req, res) => {
-        res.send("Redirect to " + path.target);
+    router.get(pathList[x].path, (req, res) => {
+        res.send("Redirect to " + pathList[x].target);
       }
     )
   }
   else if (pathList[x].type === "post") {
-    router.post(path.path, (req, res) => {
-        res.send("Redirect to " + path.target);
+    router.post(pathList[x].path, (req, res) => {
+        res.send("Redirect to " + pathList[x].target);
       }
     )
   }
   else if (pathList[x].type === "put") {
-    router.put(path.path, (req, res) => {
-        res.send("Redirect to " + path.target);
+    router.put(pathList[x].path, (req, res) => {
+        res.send("Redirect to " + pathList[x].target);
       }
     )
   }
   else if (pathList[x].type === "delete") {
-    router.delete(path.path, (req, res) => {
-        res.send("Redirect to " + path.target);
+    router.delete(pathList[x].path, (req, res) => {
+        res.send("Redirect to " + pathList[x].target);
       }
     )
   }
