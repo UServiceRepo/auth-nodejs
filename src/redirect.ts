@@ -11,25 +11,25 @@ for ( let x in pathList ){
     router.get(pathList[x].path, (req, res) => {
         res.send("Redirect to " + pathList[x].target);
       }
-    )
+    );
   }
   else if (pathList[x].type === "post") {
     router.post(pathList[x].path, (req, res) => {
         res.send("Redirect to " + pathList[x].target);
       }
-    )
+    );
   }
   else if (pathList[x].type === "put") {
     router.put(pathList[x].path, (req, res) => {
         res.send("Redirect to " + pathList[x].target);
       }
-    )
+    );
   }
   else if (pathList[x].type === "delete") {
     router.delete(pathList[x].path, (req, res) => {
         res.send("Redirect to " + pathList[x].target);
       }
-    )
+    );
   }
 }
 
