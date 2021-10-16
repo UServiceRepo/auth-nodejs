@@ -1,7 +1,7 @@
 import express from "express";
 import AuthReq from "./models/AuthReq";
+import { redirectRouter } from "./redirect";
 
-var redirect = require('./redirect');
 const app = express();
 const port = 8080;
 
@@ -28,7 +28,7 @@ app.get("/authorization", (req, res) => {
   }
 });
 
-app.use('/', redirect);
+app.use('/', redirectRouter);
 
 app.get("*", (req, res) => {
   res.status(500).send("Unimplemented Feature");

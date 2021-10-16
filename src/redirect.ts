@@ -1,29 +1,28 @@
-import express from "express";
+import express, { Request, Response } from "express";
+import Path from './models/Path';
 
-var router = express.Router();
+export const redirectRouter = express.Router();
 
-var pathList = [
-  { type : "get", path : "/message", target : "https://google.ca"},
-  { type : "get", path : "/another", target : "https://senecacollege.ca"},
+let pathList: Path[] = [
+  { type: "get", routePath: "/message", routeTarget: "https://google.ca"},
+  { type: "get", routePath: "/another", routeTarget: "https://senecacollege.ca"},
 ];
 
-function redirect (req, res, pathObj) {
-  res.redirect(pathObj.target);
+function redirect (req: Request, res: Response, pathObj: Path) {
+  res.redirect(pathObj.routeTarget);
 }
 
 for ( let x in pathList ){
   if (pathList[x].type === "get"){
-    router.get(pathList[x].path, redirect(req, res, pathList[x]));
+    redirectRouter.get(pathList[x].routePath, async (req: Request, res: Response) => {redirect(req, res, pathList[x])});
   }
   else if (pathList[x].type === "post") {
-    router.post(pathList[x].path, redirect(req, res, pathList[x]));
+    redirectRouter.post(pathList[x].routePath, async (req: Request, res: Response) => {redirect(req, res, pathList[x])});
   }
   else if (pathList[x].type === "put") {
-    router.put(pathList[x].path, redirect(req, res, pathList[x]));
+    redirectRouter.put(pathList[x].routePath, async (req: Request, res: Response) => { redirect(req, res, pathList[x])});
   }
   else if (pathList[x].type === "delete") {
-    router.delete(pathList[x].path, redirect(req, res, pathList[x]));
+    redirectRouter.delete(pathList[x].routePath, async (req: Request, res: Response) => { redirect(req, res, pathList[x])});
   }
 }
-
-module.exports = router;
