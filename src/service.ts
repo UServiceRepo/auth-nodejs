@@ -1,7 +1,7 @@
 import express from "express";
 import AuthReq from "./models/AuthReq";
 
-var redirect = require('./redirect.ts');
+var redirect = require('./redirect');
 const app = express();
 const port = 8080;
 
