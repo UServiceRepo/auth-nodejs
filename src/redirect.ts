@@ -7,26 +7,22 @@ var pathList = [
   { type : "get", path : "/another", target : "https://senecacollege.ca"},
 ];
 
+function redirect (req, res, pathObj) => {
+  res.send("Redirect to " + pathList[x].target);
+}
+
 for ( let x in pathList ){
   if (pathList[x].type === "get"){
-    router.get(pathList[x].path, (req, res) => {
-        res.send("Redirect to " + pathList[x].target);
-    });
+    router.get(pathList[x].path, redirect(req, res, pathList[x]));
   }
   else if (pathList[x].type === "post") {
-    router.post(pathList[x].path, (req, res) => {
-        res.send("Redirect to " + pathList[x].target);
-    });
+    router.post(pathList[x].path, redirect(req, res, pathList[x]));
   }
   else if (pathList[x].type === "put") {
-    router.put(pathList[x].path, (req, res) => {
-        res.send("Redirect to " + pathList[x].target);
-    });
+    router.put(pathList[x].path, redirect(req, res, pathList[x]));
   }
   else if (pathList[x].type === "delete") {
-    router.delete(pathList[x].path, (req, res) => {
-        res.send("Redirect to " + pathList[x].target);
-    });
+    router.delete(pathList[x].path, redirect(req, res, pathList[x]));
   }
 }
 
