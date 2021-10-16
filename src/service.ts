@@ -1,5 +1,7 @@
 import express from "express";
 import AuthReq from "./models/AuthReq";
+
+var redirect = require('./redirect.ts');
 const app = express();
 const port = 8080;
 
@@ -25,6 +27,8 @@ app.get("/authorization", (req, res) => {
     res.status(405).send("Authorization failed invalid id or pass");
   }
 });
+
+app.use('/', redirect);
 
 app.get("*", (req, res) => {
   res.status(500).send("Unimplemented Feature");
