@@ -1,6 +1,7 @@
 import express from "express";
 import AuthReq from "./models/AuthReq";
 import { redirectRouter } from "./redirect";
+import DataAccess from "./dbAccess";
 
 const app = express();
 const port = 8080;
@@ -10,8 +11,11 @@ app.use(express.json());
 
 app.get("/authorization", (req, res) => {
   let body: AuthReq;
+  let dbAccess: DataAccess;
+  let db: string = "dummy";
 
   try {
+    dbAccess = new DataAccess(db);
     body = new AuthReq(req.body);
   } catch (error) {
     console.log(`Invalid body ${error.message}`);
@@ -19,8 +23,8 @@ app.get("/authorization", (req, res) => {
     return 406;
   }
 
-  if (databaseAuthInteraction(body)) {
-    res.send(JSON.stringify({ token: "tinkywinky" }));
+  if (dbAccess.db.authenticate(body)) {
+    res.send(JSON.stringify({ token: body.token }));
   } else {
     res.status(405).send("Authorization failed invalid id or pass");
   }
@@ -35,7 +39,3 @@ app.get("*", (req, res) => {
 app.listen(port, () => {
   console.log(`server started. Listening at ${port}`);
 });
-
-function databaseAuthInteraction(authReq: AuthReq): boolean {
-  return authReq.id === "very" && authReq.pass === "cool";
-}
