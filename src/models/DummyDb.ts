@@ -7,7 +7,7 @@ export default class DummyDb implements DbInterface {
   dummyToken: string = "tinkywinky";
   constructor (){}
   authenticate (auth: AuthReq): boolean {
-    auth.valid = (auth.id === dummyId && auth.pass === dummyPass) || auth.token === dummyToken;
+    auth.valid = (auth.id === this.dummyId && auth.pass === this.dummyPass) || auth.token === this.dummyToken;
     return auth.valid;
   }
 }
