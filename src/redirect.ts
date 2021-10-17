@@ -29,8 +29,21 @@ function createPathList(): Path[] {
 const pathList: Path[] = createPathList()
 
 function redirect(req: Request, res: Response, pathObj: Path) {
+
   if (pathObj.routeTarget === "/authentication")
     throw new URIError("Invalid Target Path.");
+
+  let body: AuthReq;
+  let dbAccess: DataAccess;
+  let dbType: keyof typeof DaoType = "dummy";
+  let connStr: string = "";
+
+  dbAccess = new DataAccess(dbType,connStr);
+  body = new AuthReq(req.body);
+
+  if (!dbAccess.db.authenticate(body))
+    throw new Error("Authentication Failed.");
+
   res.redirect(pathObj.routeTarget);
 }
 
