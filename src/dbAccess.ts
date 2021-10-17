@@ -6,7 +6,7 @@ export enum DaoType {
   dummy,
 }
 
-export default DataAccess {
+export default class DataAccess {
   type: DaoType;
   db: DbInterface;
   constructor(type: keyof typeof DaoType, connectString: string = ""){
