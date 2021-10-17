@@ -1,5 +1,5 @@
 import AuthReq from "./AuthReq";
 
 export default interface DbInterface {
-  authenticate(auth: AuthReq): bool;
+  authenticate(auth: AuthReq): boolean;
 }

@@ -14,5 +14,5 @@ export default class DataAccess {
     if (this.type == DaoType.dummy){
       this.db = new DummyDb();
     }
-  }
+  };
 }
