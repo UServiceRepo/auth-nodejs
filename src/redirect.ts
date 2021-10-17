@@ -9,6 +9,8 @@ let pathList: Path[] = [
 ];
 
 function redirect(req: Request, res: Response, pathObj: Path) {
+  if (pathObj.routeTarget === "/authentication")
+    throw new URIError("Invalid Target Path.");
   res.redirect(pathObj.routeTarget);
 }
 
