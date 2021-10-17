@@ -1,5 +1,5 @@
 import AuthReq from "./models/AuthReq";
 
-interface DbInterface {
+export interface DbInterface {
   authenticate(auth: AuthReq): bool;
 }

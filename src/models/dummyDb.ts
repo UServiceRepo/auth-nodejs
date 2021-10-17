@@ -1,7 +1,7 @@
 import AuthReq from "./AuthReq";
 import DbInterface from "./DbInterface";
 
-class DummyDb implements DbInterface {
+export class DummyDb implements DbInterface {
   dummyId: string = "very";
   dummyPass: string = "cool";
   dummyToken: string = "tinkywinky";
