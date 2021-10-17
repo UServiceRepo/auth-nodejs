@@ -9,9 +9,9 @@ export enum DaoType {
 export default class DataAccess {
   type: DaoType;
   db: DbInterface;
-  constructor(type: keyof typeof DaoType, connectString: string = ""){
+  constructor(type: keyof typeof DaoType, connectString: string){
     this.type = DaoType[type];
-    if (this.type == DaoType.dummy){
+    if (this.type === DaoType.dummy){
       this.db = new DummyDb();
     }
   };

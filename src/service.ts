@@ -1,7 +1,7 @@
 import express from "express";
 import AuthReq from "./models/AuthReq";
 import { redirectRouter } from "./redirect";
-import DataAccess from "./dbAccess";
+import DataAccess, {DaoType} from "./dbAccess";
 
 const app = express();
 const port = 8080;
@@ -12,10 +12,11 @@ app.use(express.json());
 app.get("/authorization", (req, res) => {
   let body: AuthReq;
   let dbAccess: DataAccess;
-  let db: string = "dummy";
+  let dbType: keyof typeof DaoType = "dummy";
+  let connStr: string = "";
 
   try {
-    dbAccess = new DataAccess(db);
+    dbAccess = new DataAccess(dbType,connStr);
     body = new AuthReq(req.body);
   } catch (error) {
     console.log(`Invalid body ${error.message}`);
