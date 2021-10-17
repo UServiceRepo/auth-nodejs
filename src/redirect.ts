@@ -1,12 +1,32 @@
 import express, { Request, Response } from "express";
 import Path, { PathType } from "./models/Path";
+import fs from 'fs';
+import yaml from 'js-yaml';
 
 export const redirectRouter = express.Router();
 
-let pathList: Path[] = [
-  new Path("get", "/message", "https://google.ca"),
-  new Path("get", "/another", "https://senecacollege.ca"),
-];
+function createPathList(): Path[] {
+  let pathList: Path[] = [] 
+
+  try {
+      const paths = yaml.load(fs.readFileSync('./pathList.yaml', 'utf8')) as Path[];
+      const typeKeys = Object.keys(PathType).filter(x => !(parseInt(x) >= 0));
+      pathList = paths.map(path => {
+        if(!typeKeys.includes(String(path.type))) {
+          throw new Error(`Invalid path type -> ${path.type}`)
+        }
+
+        const { type, routePath, routeTarget } = path
+        return new Path(type as unknown as keyof typeof PathType, routePath, routeTarget)
+      })
+  } catch (e) {
+      console.log('It was not possible to load the path list. Check the yaml file\n', e);
+  }
+
+  return pathList
+}
+
+const pathList: Path[] = createPathList()
 
 function redirect(req: Request, res: Response, pathObj: Path) {
   if (pathObj.routeTarget === "/authentication")
