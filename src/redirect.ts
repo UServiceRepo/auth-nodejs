@@ -5,11 +5,13 @@ import yaml from 'js-yaml';
 
 export const redirectRouter = express.Router();
 
-function createPathList(): Path[] {
+const PATH_LIST_FILE = './pathList.yaml'
+
+function createPathList(path: string): Path[] {
   let pathList: Path[] = [] 
 
   try {
-      const paths = yaml.load(fs.readFileSync('./pathList.yaml', 'utf8')) as Path[];
+      const paths = yaml.load(fs.readFileSync(path, 'utf8')) as Path[];
       const typeKeys = Object.keys(PathType).filter(x => !(parseInt(x) >= 0));
       pathList = paths.map(path => {
         if(!typeKeys.includes(String(path.type))) {
@@ -26,7 +28,7 @@ function createPathList(): Path[] {
   return pathList
 }
 
-const pathList: Path[] = createPathList()
+const pathList: Path[] = createPathList(PATH_LIST_FILE)
 
 function redirect(req: Request, res: Response, pathObj: Path) {
   if (pathObj.routeTarget === "/authentication")
