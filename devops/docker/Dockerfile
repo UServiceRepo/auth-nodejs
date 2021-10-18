@@ -1,3 +1,4 @@
 ARG VERSION=latest
 FROM node:$VERSION
 WORKDIR /app
+COPY . .
