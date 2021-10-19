@@ -1,0 +1,8 @@
+--- # Path list available
+  - type: get
+    routePath: /message
+    routeTarget: https://google.ca
+
+  - type: post
+    routePath: /another
+    routeTarget: https://senecacollege.ca
